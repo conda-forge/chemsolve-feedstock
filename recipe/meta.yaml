@@ -23,6 +23,7 @@ requirements:
     - chempy
     - pyparsing
     - periodictable
+    - setuptools
   run:
     - python >={{ python_min }}
     - numpy
