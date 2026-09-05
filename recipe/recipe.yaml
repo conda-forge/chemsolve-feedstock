@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  name: chemsolve
+  version: "1.8.3"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/chemsolve-${{ version }}.tar.gz
+  sha256: c6e0b08195a954767563cca34579a2b80370f6c48d64ba6eb227ff467ea3dca2
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - pandas
+    - pip
+    - python ${{ python_min }}.*
+    - sympy
+    - chempy
+    - pyparsing
+    - periodictable
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+    - numpy
+    - pandas
+    - sympy
+    - chempy
+    - pyparsing
+    - periodictable
+
+tests:
+  - python:
+      imports:
+        - chemsolve
+      pip_check: true
+      python_version:
+        - ${{ python_min }}
+        - "*"
+
+about:
+  summary: A low-level chemistry library for solving and practicing chemistry problems.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/amogh7joshi/chemsolve
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
